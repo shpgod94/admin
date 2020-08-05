@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from address.views import *
+import address.views
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url('login/', login),
-    url('index/', index),
-    url('register/', register),
+    path('banner/', address.views.banner ,name='banner'),
+    path('', address.views.login ,name='login'),
+    path('index/', address.views.index ,name='index'),
+    path('qna/', address.views.qna ,name='qna'),
+    path('user/', address.views.user ,name='user'),
+    path('matching/', address.views.matching ,name='matching'),
+    path('money/', address.views.money ,name='money'),
 ]

@@ -15,7 +15,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand">관리자 페이지</a>
+            <a class="navbar-brand" href="{% url 'index' %}">관리자 페이지</a>
 
 
             <!-- Navbar-->
@@ -26,25 +26,25 @@
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                     <div class="sb-sidenav-menu" >
                         <div class="nav">
-                            <a class="nav-link" href="login/">
+                            <a class="nav-link" href="{% url 'money' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 수익
                             </a>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="{% url 'user' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 회원
                             </a>
 
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <a class="nav-link collapsed" href="{% url 'matching' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 매칭
                             </a>
 
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{% url 'qna' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Q&A
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="{% url 'banner' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 광고
                             </a>
