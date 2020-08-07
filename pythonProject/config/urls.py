@@ -21,7 +21,8 @@ import address.views
 urlpatterns = [
     path('banner/', address.views.banner ,name='banner'),
     path('', address.views.login ,name='login'),
-    path('index/', address.views.index ,name='index'),
+    path('logout', address.views.logout ,name='logout'),
+    path('index', address.views.index ,name='index'),
     path('qna/', address.views.qna ,name='qna'),
     path('user/', address.views.user ,name='user'),
     path('matching/', address.views.matching ,name='matching'),
