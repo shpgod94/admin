@@ -29,5 +29,5 @@ urlpatterns = [
     path('qnawritepage/', address.views.qnawritepage ,name='qnawritepage'),
     path('user/', address.views.user ,name='user'),
     path('matching/', address.views.matching ,name='matching'),
-    path('money/', address.views.money ,name='money'),
+    path('sel/', address.views.sel ,name='sel'),
 ]

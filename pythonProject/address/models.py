@@ -77,15 +77,28 @@ def deleteqnapage(**key):
         conn.commit()
         conn.close()
 
-def qnawritepage(**key):
+def qnawrite(**key):
     conn = connections()
     cursor = conn.cursor()
-    sql_update = "update qna set recontent = :recontent where qna_num= :qna_num;"
+    sql_update = "update qna set recontent = :recon ,qtitle='답변완료'+:qtitle where qna_num= :qna_num"
     try:
-        cursor.execute(sql_update,recontent=key['recontent'],qna_num=key['qna_num'])
+        cursor.execute(sql_update, recon=key['recontent'], qtitle=key['qtitle'], qna_num=key['qna_num'])
     except Exception as e:
         print('출력오류', e)
     finally:
         conn.commit()
         conn.close()
 
+def selzz():
+    conn = connections()
+    cursor = conn.cursor()
+    sql_sellist = "select p.MERCHANT_UID, p.PRODUCT_NUM, p.BUYER_NUM, p.imp, p.PAID_AMOUNT, p.PAID_DATE, p.PAID_COUNT, u.user_id from paylist p, user_info u where p.buyer_num = u.user_num order by p.PAID_DATE desc"
+    try:
+        cursor.execute(sql_sellist)
+    except Exception as e:
+        print('출력오류', e)
+    finally:
+        sel = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    return sel

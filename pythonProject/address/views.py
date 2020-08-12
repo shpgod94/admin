@@ -8,7 +8,7 @@ from django.template import RequestContext
 from requests import session
 
 from address import models
-from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawritepage
+from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawrite, selzz
 
 
 def login(request):
@@ -72,10 +72,12 @@ def deleteqna(request):
     return redirect('qna')
 
 def qnawritepage(request):
+    qtitle = request.POST['qtitle']
     qna_num = request.POST['qna_num']
     recontent = request.POST['recontent']
-    qnawritepage(recontent=recontent,qna_num=qna_num)
+    qnawrite(qtitle=qtitle,recontent=recontent, qna_num=qna_num)
     return redirect('qna')
+
 
 def user(request):
     return render(request, 'user.html')
@@ -84,6 +86,10 @@ def matching(request):
     return render(request, 'matching.html')
 
 
-
-def money(request):
-    return render(request, 'money.html')
+def sel(request):
+    sellist = selzz()
+    selpage = []
+    for e in sellist:
+        svo = {"order_num": e[0],  "product_num": e[1], "user_num": e[2], "imp": e[3], "total": e[4],"order_date": e[5], "amount": e[6], "user_id": e[7]}
+        selpage.append(svo)
+    return render(request, 'sel.html', {'sel': selpage})

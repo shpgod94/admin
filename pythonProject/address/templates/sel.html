@@ -26,7 +26,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                     <div class="sb-sidenav-menu" >
                         <div class="nav">
-                            <a class="nav-link" href="{% url 'money' %}">
+                            <a class="nav-link" href="{% url 'sel' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 수익
                             </a>
@@ -57,7 +57,34 @@
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4" style="text-align:center">수익 관리</h1>
-                        <hr>
+                        <section id="container">
+                    <div style="height: 500px;">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>결제일</th>
+                                <th>주문번호</th>
+                                <th>사용자 ID</th>
+                                <th>제품번호</th>
+                                <th>결제갯수</th>
+                                <th>총 금액</th>
+                                <th>IMP</th>
+                            </tr>
+                            </thead>
+                            {% for e in sel%}
+                            <tr>
+                                <td>{{e.order_date}}</td>
+                                <td>{{e.order_num}}</td>
+                                <td>{{e.user_id}}</td>
+                                <td>{{e.product_num}}</td>
+                                <td>{{e.amount}}</td>
+                                <td>{{e.total}}</td>
+                                <td>{{e.imp}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </section>
 
 
 
