@@ -8,6 +8,7 @@ from django.template import RequestContext
 from requests import session
 
 from address import models
+from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawritepage
 
 
 def login(request):
@@ -47,13 +48,42 @@ def banner(request):
     return render(request, 'banner.html')
 
 def qna(request):
-    return render(request, 'qna.html')
+    qnalist = qnapage()
+    qpage = []
+    for e in qnalist:
+        qvo = {"user_num":e[0],"user_id":e[1],"qna_num":e[2],"qtitle":e[3],"askcontent":e[4],"recontent":e[5],"qdate":e[6]}
+        qpage.append(qvo)
+    return render(request, 'qna.html' , {'qnapage':qpage})
+
+def qnadetail(request):
+    if request.method == "POST":
+        qna_num = request.POST['qna_num']
+        qnaview=qnaviewpage(qna_num=qna_num)
+        list = []
+        qvo = {"user_num":qnaview[0], "user_id":qnaview[1], "qna_num":qnaview[2], "qtitle":qnaview[3], "askcontent":qnaview[4], "recontent":qnaview[5], "qdate":qnaview[6]}
+
+        return render(request, 'qnadetail.html' ,{'qnaview':qvo})
+    else:
+        return render(request, 'qna.html')
+
+def deleteqna(request):
+    qna_num = request.POST['qna_num']
+    deleteqnapage(qna_num=qna_num)
+    return redirect('qna')
+
+def qnawritepage(request):
+    qna_num = request.POST['qna_num']
+    recontent = request.POST['recontent']
+    qnawritepage(recontent=recontent,qna_num=qna_num)
+    return redirect('qna')
 
 def user(request):
     return render(request, 'user.html')
 
 def matching(request):
     return render(request, 'matching.html')
+
+
 
 def money(request):
     return render(request, 'money.html')

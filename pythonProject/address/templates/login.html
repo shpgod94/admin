@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 {% load static %}
-<DOCTYPE  html>
 
 <html lang="en">
-  <head>
+<head>
     <link rel="stylesheet" href="{% static 'css/signin.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <meta charset="utf-8">
@@ -16,7 +17,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
 
@@ -25,26 +26,27 @@
           font-size: 3.5rem;
         }
       }
+
     </style>
     <!-- Custom styles for this template -->
 
-  </head>
+</head>
 
-  <body class="text-center">
-    <form class="form-signin" method="post" action="">
-      {% csrf_token %}
+<body class="text-center">
+<form class="form-signin" method="post" action="">
+    {% csrf_token %}
 
-  <h1 class="h3 mb-3 font-weight-normal">관리자 페이지</h1>
-      <br>
-  <input type="text" id="username" name="username" class="form-control" placeholder="ID" required autofocus>
-  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
-  </div>
-      <br>
-      <p style="color: red">{{msg1}}</p>
-      <p id="m" style="color: red"> {{msg2}}</p>
+    <h1 class="h3 mb-3 font-weight-normal">관리자 페이지</h1>
+    <br>
+    <input type="text" id="username" name="username" class="form-control" placeholder="ID" required autofocus>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+    </div>
+    <br>
+    <p style="color: red">{{msg1}}</p>
+    <p id="m" style="color: red"> {{msg2}}</p>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 
 </form>
 </body>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - SB Admin</title>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+            crossorigin="anonymous"></script>
+</head>
+<style>
+
+    #test_btn1 {
+	float: right;
+	border-radius: 5px;
+	border: 1px solid white;
+	background-color: #FFE08C;
+	padding: 5px;
+	color: white;
+}
+
+
+
+
+
+
+
+
+</style>
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">관리자 페이지</a>
+
+
+    <!-- Navbar-->
+
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <a class="nav-link" href="{% url 'money' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        수익
+                    </a>
+                    <a class="nav-link collapsed" href="http://192.168.0.125/nexacro/">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        회원
+                    </a>
+
+                    <a class="nav-link collapsed" href="{% url 'matching' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        매칭
+                    </a>
+
+                    <a class="nav-link" href="{% url 'qna' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Q&A
+                    </a>
+                    <a class="nav-link" href="{% url 'banner' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        광고
+                    </a>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4" style="text-align:center">Q&A 관리</h1>
+                <form action="{% url 'qnawritepage' %}" method="post" id="qnawritepage">
+                    {% csrf_token %}
+                    <input type="hidden" name="qna_num" value="{{qnaview.qna_num}}">
+                    <button type="submit" id="test_btn1">답변쓰기</button>
+
+            </div>
+
+            <section id="container">
+
+
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label" style="text-align:center">작성날짜</label>
+
+                    <p style="margin-left:25px;">{{qnaview.qdate}}</p>
+
+                    <hr>
+
+                </div>
+                <div class="form-group" style="margin-left:500px;">
+                    <label class="col-sm-2 control-label">작성자</label> <input
+                        type="text" id="user_id" name="user_id" class="form-control"
+                        value="{{qnaview.user_id}}" readonly="readonly" style="width:150px;"/>
+                </div>
+                <div class="form-group" style="margin-left:500px;">
+                    <label class="col-sm-2 control-label">제목</label> <input
+                        type="text" id="qtitle" name="qtitle" class="form-control"
+                        value="{{qnaview.qtitle}}" readonly="readonly" style="width:350px;"/>
+                </div>
+                <div class="form-group" style="margin-left:500px;">
+                    <label class="col-sm-2 control-label">질문내용</label>
+                    <textarea id="askcontent" name="askcontent" class="form-control"
+                              readonly="readonly" style="width:350px;">{{qnaview.askcontent}}</textarea>
+                </div>
+                <div class="form-group" style="margin-left:500px;">
+                    <label class="col-sm-2 control-label">답변내용</label>
+                    <textarea id="recontent" name="recontent" class="form-control"
+                              style="width:350px;"></textarea>
+                </div>
+                </form>
+
+            </section>
+            <section>
+                <br>
+                <div style="text-align:center">
+                    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+
+                    <button type="button" id="delete_btn"
+                            class="delete_btn btn btn-danger">삭제
+                        <form action="{% url 'deleteqna' %}" name="deleteqnapage" method="post"
+                          class="deleteqnapage">
+                            {% csrf_token %}
+                        <input type="hidden" name="qna_num" value="{{qnaview.qna_num}}">
+                        <input type="hidden" name="user_id" value="{{qnaview.user_id}}">
+                    </form>
+                    </button>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp;
+                    <button type="button" id="goback" class="list_btn btn btn-primary"
+                    >목록
+                    </button>
+
+                </div>
+            </section>
+            <hr/>
+        </main>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/datatables-demo.js"></script>
+</body>
+
+<script>
+
+        $(document).on('click', '#goback', function() {
+			location.href="{% url 'qna' %}"
+		});
+
+		$(document).on('click', '#delete_btn', function() {
+			$(this).children('.deleteqnapage').submit();
+		});
+
+		$(document).on('click', '#test_btn1', function() {
+		    $(this).children('.qnawritepage').submit();
+		});
+
+
+
+
+
+
+
+
+</script>
+</html>
+
+
+
