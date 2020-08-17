@@ -8,7 +8,8 @@ from django.template import RequestContext
 from requests import session
 
 from address import models
-from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawrite, selzz
+from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawrite, selzz, banuser, banuser2, \
+    banuser3
 
 
 def login(request):
@@ -45,7 +46,28 @@ def register(request):
     return render(request, 'register.html')
 
 def banner(request):
-    return render(request, 'banner.html')
+    banlist = banuser()
+    bpage = []
+    for e in banlist:
+        bvo = {"report_num": e[0], "user_num": e[1], "user_id": e[2], "report_user_num": e[3], "reason": e[4]}
+        bpage.append(bvo)
+    return render(request, 'banner.html', {'bpage':bpage})
+
+def banner2(request):
+    banlist = banuser2()
+    boardpage = []
+    for e in banlist:
+        bvo = {"report_board_num": e[0], "user_num": e[1], "user_id": e[2], "board_num": e[3], "reason": e[4]}
+        boardpage.append(bvo)
+    return render(request, 'banner2.html', {'boardpage':boardpage})
+
+def banner3(request):
+    banlist = banuser3()
+    bwritten = []
+    for e in banlist:
+        bvo = {"report_comment_num": e[0], "user_num": e[1], "user_id": e[2], "board_num": e[3], "comment_num": e[4],"reason": e[5]}
+        bwritten.append(bvo)
+    return render(request, 'banner3.html', {'bcommentpage':bwritten})
 
 def qna(request):
     qnalist = qnapage()

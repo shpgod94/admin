@@ -20,6 +20,8 @@ from address.views import *
 import address.views
 urlpatterns = [
     path('banner/', address.views.banner ,name='banner'),
+    path('banner2/', address.views.banner2 ,name='banner2'),
+    path('banner3/', address.views.banner3 ,name='banner3'),
     path('', address.views.login ,name='login'),
     path('logout', address.views.logout ,name='logout'),
     path('index', address.views.index ,name='index'),

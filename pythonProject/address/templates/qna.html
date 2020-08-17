@@ -62,10 +62,28 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Q&A
                     </a>
-                    <a class="nav-link" href="{% url 'banner' %}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        광고
+                    <a class="nav-link collapsed" href="{% url 'banner' %}" data-toggle="collapse"
+                       data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        신고
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                         data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'banner' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                회원신고
+                            </a>
+                            <a class="nav-link" href="{% url 'banner2' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                게시물신고
+                            </a><a class="nav-link" href="{% url 'banner3' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                댓글신고
+                            </a>
+                        </nav>
+                    </div>
                 </div>
             </div>
 

@@ -80,7 +80,7 @@ def deleteqnapage(**key):
 def qnawrite(**key):
     conn = connections()
     cursor = conn.cursor()
-    sql_update = "update qna set recontent = :recon ,qtitle='답변완료'+:qtitle where qna_num= :qna_num"
+    sql_update = "update qna set recontent = :recon ,qtitle= :qtitle where qna_num= :qna_num"
     try:
         cursor.execute(sql_update, recon=key['recontent'], qtitle=key['qtitle'], qna_num=key['qna_num'])
     except Exception as e:
@@ -102,3 +102,45 @@ def selzz():
         cursor.close()
         conn.close()
     return sel
+
+def banuser():
+    conn = connections()
+    cursor = conn.cursor()
+    sql_banuserlist = "select * from report_user order by report_num"
+    try:
+        cursor.execute(sql_banuserlist)
+    except Exception as e:
+        print('출력오류', e)
+    finally:
+        ban = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    return ban
+
+def banuser2():
+    conn = connections()
+    cursor = conn.cursor()
+    sql_banboardlist = "select * from report_board order by report_board_num"
+    try:
+        cursor.execute(sql_banboardlist)
+    except Exception as e:
+        print('출력오류', e)
+    finally:
+        ban = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    return ban
+
+def banuser3():
+    conn = connections()
+    cursor = conn.cursor()
+    sql_bancommentlist = "select * from report_comment order by report_comment_num"
+    try:
+        cursor.execute(sql_bancommentlist)
+    except Exception as e:
+        print('출력오류', e)
+    finally:
+        ban = cursor.fetchall()
+        cursor.close()
+        conn.close()
+    return ban
