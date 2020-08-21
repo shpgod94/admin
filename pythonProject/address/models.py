@@ -144,3 +144,23 @@ def banuser3():
         cursor.close()
         conn.close()
     return ban
+
+def selchartdate():
+    conn = connections()
+    cursor = conn.cursor()
+    sql_bancommentlist = "select sum(paid_amount), to_char(paid_date,'YYYY-MM-DD') from paylist group by to_char(paid_date,'YYYY-MM-DD') order by 2 desc"
+    try:
+        cursor.execute(sql_bancommentlist)
+    except Exception as e:
+        print('출력오류', e)
+    finally:
+        ban = cursor.fetchall()
+        print(ban)
+        cursor.close()
+        conn.close()
+    return ban
+
+class KospiPredict(models.Model):
+    date = models.DateField("날짜", max_length=10, null=False, unique=True)
+    close = models.FloatField("가격", null=True)
+    open = models.FloatField("개수", null=True)

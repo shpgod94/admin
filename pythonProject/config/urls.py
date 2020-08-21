@@ -30,6 +30,6 @@ urlpatterns = [
     path('qnadetail/', address.views.qnadetail ,name='qnadetail'),
     path('qnawritepage/', address.views.qnawritepage ,name='qnawritepage'),
     path('user/', address.views.user ,name='user'),
-    path('matching/', address.views.matching ,name='matching'),
     path('sel/', address.views.sel ,name='sel'),
+    path('sel/chart/', address.views.chart),
 ]

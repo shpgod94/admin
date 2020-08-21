@@ -8,8 +8,7 @@ from django.template import RequestContext
 from requests import session
 
 from address import models
-from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawrite, selzz, banuser, banuser2, \
-    banuser3
+from address.models import qnapage, connections, qnaviewpage, deleteqnapage, qnawrite, selzz, banuser, banuser2,banuser3,selchartdate
 
 
 def login(request):
@@ -21,7 +20,12 @@ def login(request):
         if models.idcheck(user_id=username,pwd=password) == 1:
             profile = "select * from workers where user_id = :userid and pwd = :password"
             request.session['user']= profile
-            return redirect('index')
+            sellist = selzz()
+            selpage = []
+            for e in sellist:
+                svo = {"order_num": e[0],  "product_num": e[1], "user_num": e[2], "imp": e[3], "total": e[4],"order_date": e[5], "amount": e[6], "user_id": e[7]}
+                selpage.append(svo)
+            return render(request, 'sel.html', {'sel': selpage})
         else:
             msg1 = '로그인을 실패하였습니다.'
             msg2 = 'ID 및 PW를 다시 확인해주세요.'
@@ -40,7 +44,12 @@ def logout(request):
 
 
 def index(request):
-    return render(request, 'index.html')
+    sellist = selzz()
+    selpage = []
+    for e in sellist:
+        svo = {"order_num": e[0],  "product_num": e[1], "user_num": e[2], "imp": e[3], "total": e[4],"order_date": e[5], "amount": e[6], "user_id": e[7]}
+        selpage.append(svo)
+    return render(request, 'sel.html', {'sel': selpage})
 
 def register(request):
     return render(request, 'register.html')
@@ -104,14 +113,24 @@ def qnawritepage(request):
 def user(request):
     return render(request, 'user.html')
 
-def matching(request):
-    return render(request, 'matching.html')
-
-
 def sel(request):
+
     sellist = selzz()
     selpage = []
     for e in sellist:
         svo = {"order_num": e[0],  "product_num": e[1], "user_num": e[2], "imp": e[3], "total": e[4],"order_date": e[5], "amount": e[6], "user_id": e[7]}
         selpage.append(svo)
     return render(request, 'sel.html', {'sel': selpage})
+
+def chart(request):
+    list = models.selchartdate()
+    datedata = ['x']
+    paydata = ['Amount']
+    for i in list:
+        datedata.append(i[1])
+
+        paydata.append(i[0])
+    chart_data = dict()
+    chart_data['datedata'] = datedata
+    chart_data['paydata'] = paydata
+    return render(request, "chartserver.html",{"chart_data":[chart_data]})
