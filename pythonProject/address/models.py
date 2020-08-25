@@ -10,7 +10,7 @@ from matplotlib.backend_bases import cursors
 
 def connections():
     try:
-        conn = ora.connect('project/kosmo64@192.168.0.119:1521/orcl', encoding='utf-8')
+        conn = ora.connect('AFinal/kosmo64@192.168.0.9:1521/orcl', encoding='utf-8')
     except Exception as e:
         conn = "예외 발생"
         print(conn)
